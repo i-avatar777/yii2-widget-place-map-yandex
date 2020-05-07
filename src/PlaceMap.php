@@ -155,7 +155,7 @@ class PlaceMap extends InputWidget
     public function onLoadDb($field)
     {
         $attribute = $this->attribute;
-        if (!Application::isEmpty($this->value)) {
+        if (!self::isEmpty($this->value)) {
             $data = Json::decode($this->value);
             $this->value = [
                 'lat'     => $data['lat'],
@@ -183,7 +183,12 @@ class PlaceMap extends InputWidget
         $bandle = Yii::$app->assetManager->getBundle('\common\assets\YandexMaps');
 
         $id = Html::getInputId($this->model, $this->attribute);
-        $hash = 'init'.Security::generateRandomString(10);
+
+        $string = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
+        $string = str_shuffle($string);
+        $string = substr($string, 0, 10);
+
+        $hash = 'init'.$string;
         $lat = '';
         $lng = '';
 
@@ -195,10 +200,10 @@ class PlaceMap extends InputWidget
         if ($lat == '') $lat = "''";
         if ($lng == '') $lng = "''";
 
-        if (Application::isEmpty($this->callback)) {
-            $call = "PlaceMapYandex.init('{$id}', '{$bandle->key}', {$lat}, {$lng});";
+        if (self::isEmpty($this->callback)) {
+            $call = "PlaceMapYandex2.init('{$id}', '{$bandle->key}', {$lat}, {$lng});";
         } else {
-            $call = "PlaceMapYandex.init('{$id}', '{$bandle->key}', {$lat}, {$lng}, {$this->callback});";
+            $call = "PlaceMapYandex2.init('{$id}', '{$bandle->key}', {$lat}, {$lng}, {$this->callback});";
         }
 
         $this->getView()->registerJs(<<<JS
@@ -235,6 +240,32 @@ JS
         $query = $formName . '.' . $fieldName;
 
         return ArrayHelper::getValue(\Yii::$app->request->post(), $query, '');
+    }
+
+    /**
+     * Если null => true
+     * Если is_string => Если длина == 0 ? true : false
+     * Если is_object => false
+     * Если is_array => Если длина == 0 ? true : false
+     *
+     * @param $val
+     *
+     * @return bool
+     */
+    public static function isEmpty($val)
+    {
+        if (is_null($val)) return true;
+        if (is_string($val)) {
+            if (strlen($val) == 0) return true;
+            return false;
+        }
+        if (is_object($val)) return false;
+        if (is_array($val)) {
+            if (count($val) == 0) return true;
+            return false;
+        }
+
+        return false;
     }
 
 }

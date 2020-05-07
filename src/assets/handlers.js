@@ -4,7 +4,7 @@
  * @type {{init: Function}}
  */
 
-var PlaceMapYandex = {
+var PlaceMapYandex2 = {
 
     map: null,
     marker: null,
@@ -24,12 +24,12 @@ var PlaceMapYandex = {
      */
     init: function (fieldId, apikey, lat, lng, callback) {
 
-        PlaceMapYandex.apikey = apikey;
-        PlaceMapYandex.lat = lat;
-        PlaceMapYandex.lng = lng;
+        PlaceMapYandex2.apikey = apikey;
+        PlaceMapYandex2.lat = lat;
+        PlaceMapYandex2.lng = lng;
 
-        if (PlaceMapYandex.lat == '') PlaceMapYandex.lat = 44.515933;
-        if (PlaceMapYandex.lng == '') PlaceMapYandex.lng = 48.707787;
+        if (PlaceMapYandex2.lat == '') PlaceMapYandex2.lat = 44.515933;
+        if (PlaceMapYandex2.lng == '') PlaceMapYandex2.lng = 48.707787;
 
         // При возникновении событий, изменяющих состояние карты,
         // ее параметры передаются в адресную строку браузера (после символа #).
@@ -37,10 +37,10 @@ var PlaceMapYandex = {
         // соответствующее переданным параметрам.
         // http://.../savemap.html#type=hybrid&center=93.3218,60.0428&zoom=12
         var myMap = new ymaps.Map("map", {
-                center: [PlaceMapYandex.lng, PlaceMapYandex.lat], // Волгоград
+                center: [PlaceMapYandex2.lng, PlaceMapYandex2.lat], // Волгоград
                 zoom: 3
             }),
-            // myPlacemark1 = new ymaps.Placemark([PlaceMapYandex.lng, PlaceMapYandex.lat], {
+            // myPlacemark1 = new ymaps.Placemark([PlaceMapYandex2.lng, PlaceMapYandex2.lat], {
             //     balloonContent: 'Первый',
             //     myId: 'first'
             // }),
@@ -49,9 +49,9 @@ var PlaceMapYandex = {
 
         myMap.controls.remove('searchControl');
 
-        PlaceMapYandex.map = myMap;
-        // PlaceMapYandex.marker = myPlacemark1;
-        PlaceMapYandex.myPlacemarkCollection = myPlacemarkCollection;
+        PlaceMapYandex2.map = myMap;
+        // PlaceMapYandex2.marker = myPlacemark1;
+        PlaceMapYandex2.myPlacemarkCollection = myPlacemarkCollection;
 
         // myPlacemarkCollection
         //     .add(myPlacemark1)
@@ -139,18 +139,18 @@ var PlaceMapYandex = {
             $('#'+fieldId+'-lng').val(coords[0]);
             $('#'+fieldId+'-lat').val(coords[1]);
 
-            if (PlaceMapYandex.marker !== null) {
-                PlaceMapYandex.myPlacemarkCollection.remove(PlaceMapYandex.marker);
+            if (PlaceMapYandex2.marker !== null) {
+                PlaceMapYandex2.myPlacemarkCollection.remove(PlaceMapYandex2.marker);
             }
 
             myPlacemark1 = new ymaps.Placemark([coords[0], coords[1]], {
                 balloonContent: 'Первый',
                 myId: 'first'
             });
-            PlaceMapYandex.myPlacemarkCollection.add(myPlacemark1);
-            PlaceMapYandex.marker = myPlacemark1;
+            PlaceMapYandex2.myPlacemarkCollection.add(myPlacemark1);
+            PlaceMapYandex2.marker = myPlacemark1;
 
-            var url = 'https://geocode-maps.yandex.ru/1.x/?apikey=' + PlaceMapYandex.apikey + '&geocode=' + coords[1] + ',' + coords[0] + '&format=json&kind=house';
+            var url = 'https://geocode-maps.yandex.ru/1.x/?apikey=' + PlaceMapYandex2.apikey + '&geocode=' + coords[1] + ',' + coords[0] + '&format=json&kind=house';
             var json1 = JSON.stringify({lat: coords[1], lng: coords[0]});
 
             // console.log(json1);
