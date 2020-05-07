@@ -1,6 +1,6 @@
 <?php
 
-namespace common\widgets\PlaceMapYandex;
+namespace iAvatar777\widgets\PlaceMapYandex;
 
 use common\services\Security;
 use cs\Application;
@@ -96,7 +96,7 @@ class PlaceMap extends InputWidget
             // input
             $inputAttributes = ArrayHelper::getValue($this->style, 'input', []);
             $inputAttributes = ArrayHelper::merge($inputAttributes, ['id' => $this->fieldId]);
-            $html[] = Html::input('text', $this->fieldName, $place, $inputAttributes);
+            $html[] = Html::input('hidden', $this->fieldName, $place, $inputAttributes);
 
             $html[] = Html::tag('div', null, [
                 'id'    => 'map',
@@ -154,23 +154,6 @@ class PlaceMap extends InputWidget
      */
     public function onLoadDb($field)
     {
-        $attribute = $this->attribute;
-        if (!self::isEmpty($this->value)) {
-            $data = Json::decode($this->value);
-            $this->value = [
-                'lat'     => $data['lat'],
-                'lng'     => $data['lng'],
-                'place'   => $data['place'],
-            ];
-        } else {
-            $this->value = [
-                'lat'     => '',
-                'lng'     => '',
-                'place'   => '',
-            ];
-        }
-        $this->model->$attribute = $this->value;
-
         return true;
     }
 
@@ -224,7 +207,6 @@ JS
     {
         return [];
     }
-
 
     /**
      * Возвращает значение поля формы из поста

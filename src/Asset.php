@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace common\widgets\PlaceMapYandex;
+namespace iAvatar777\widgets\PlaceMapYandex;
 
 use yii\web\AssetBundle;
 

@@ -153,8 +153,6 @@ var PlaceMapYandex2 = {
             var url = 'https://geocode-maps.yandex.ru/1.x/?apikey=' + PlaceMapYandex2.apikey + '&geocode=' + coords[1] + ',' + coords[0] + '&format=json&kind=house';
             var json1 = JSON.stringify({lat: coords[1], lng: coords[0]});
 
-            // console.log(json1);
-
             $('#'+fieldId).attr('value', json1);
 
             if (typeof (callback) != "undefined") {
@@ -163,11 +161,6 @@ var PlaceMapYandex2 = {
                     success: function (ret) {
                         console.log(ret);
                         callback(ret);
-                        // var o = ret.response.GeoObjectCollection.featureMember[0].GeoObject;
-                        //
-                        // $('#'+fieldId).attr('value', json1);
-                        // // $('#'+fieldId).val(o.description + '; ' + o.name);
-                        // myPlacemark1.properties._data.balloonContent = o.description + '; ' + o.name;
                     }
                 });
             }

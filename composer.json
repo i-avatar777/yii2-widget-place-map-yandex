@@ -1,6 +1,6 @@
 {
   "name": "i-avatar777/yii2-widget-place-map-yandex",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Виджет для YII2 для указания токчи на карте",
   "keywords": ["yii2-widget-place-map-yandex"],
   "type": "project",
